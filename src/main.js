@@ -1,5 +1,5 @@
 "use strict";
-const TASK_COUNT = 3;
+const TASK_COUNTER = 3;
 
 const createSiteMenuTemplate = () => {
   return (
@@ -391,6 +391,6 @@ render(boardElement, createLoadMoreButtonTemplate(), `beforeend`);
 
 render(taskListElement, createTaskEditTemplate(), `beforeend`);
 
-for (let i = 0; i < TASK_COUNT; i++) {
+for (let i = 0; i < TASK_COUNTER; i++) {
   render(taskListElement, createTaskTemplate(), `beforeend`);
 }
