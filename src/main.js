@@ -5,7 +5,6 @@ import {createSorterTemplate} from "./view/sorter.js";
 import {createTaskTemplate} from "./view/task.js";
 import {createTaskEditTemplate} from "./view/task-edit.js";
 import {createLoadMoreButtonTemplate} from "./view/load-more-button.js";
-
 const TASK_COUNT = 3;
 
 const render = (container, template, place = `beforeend`) => {
