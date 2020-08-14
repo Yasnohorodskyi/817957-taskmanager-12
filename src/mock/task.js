@@ -1,5 +1,5 @@
-import {COLORS} from "../const.js"
-import {getRandomInteger} from "../utils.js"
+import {COLORS} from "../const.js";
+import {getRandomInteger} from "../utils.js";
 
 const generateDescription = () => {
   const descriptions = [
@@ -16,7 +16,7 @@ const generateDescription = () => {
 const generateDate = () => {
   const isDate = Boolean(getRandomInteger(0, 1));
 
-  if(!isDate) {
+  if (!isDate) {
     return null;
   }
 
@@ -43,7 +43,7 @@ const generateRepeating = () => {
 };
 
 const getRandomColor = () => {
-  const colors = [`black`, `yellow`, `blue`, `green`, `pink`];
+
   const randomIndex = getRandomInteger(0, COLORS.length - 1);
 
   return COLORS[randomIndex];
@@ -61,7 +61,7 @@ export const generateTask = () => {
       fr: false,
       sa: false,
       su: false,
-    }
+    };
 
   return {
     description: generateDescription(),
