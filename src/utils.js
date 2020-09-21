@@ -1,67 +1,67 @@
-export const RenderPosition = {
-  AFTERBEGIN: `afterbegin`,
-  BEFOREEND: `beforeend`
-};
+// export const RenderPosition = {
+//   AFTERBEGIN: `afterbegin`,
+//   BEFOREEND: `beforeend`
+// };
 
-export const render = (container, element, place = RenderPosition.BEFOREEND) => {
-  switch (place) {
-    case RenderPosition.AFTERBEGIN:
-      container.prepend(element);
-      break;
-    case RenderPosition.BEFOREEND:
-      container.append(element);
-      break;
-  }
-};
+// export const render = (container, element, place = RenderPosition.BEFOREEND) => {
+//   switch (place) {
+//     case RenderPosition.AFTERBEGIN:
+//       container.prepend(element);
+//       break;
+//     case RenderPosition.BEFOREEND:
+//       container.append(element);
+//       break;
+//   }
+// };
 
-export const renderTemplate = (container, template, place = `beforeend`) => {
-  container.insertAdjacentHTML(place, template);
-};
+// export const renderTemplate = (container, template, place = `beforeend`) => {
+//   container.insertAdjacentHTML(place, template);
+// };
 
-export const createElement = (template) => {
-  const newElement = document.createElement(`div`);
-  newElement.innerHTML = template;
+// export const createElement = (template) => {
+//   const newElement = document.createElement(`div`);
+//   newElement.innerHTML = template;
 
-  return newElement.firstChild;
-};
+//   return newElement.firstChild;
+// };
 
-export const getRandomInteger = (a = 0, b = 1) => {
-  const lower = Math.ceil(Math.min(a, b));
-  const upper = Math.floor(Math.max(a, b));
+// export const getRandomInteger = (a = 0, b = 1) => {
+//   const lower = Math.ceil(Math.min(a, b));
+//   const upper = Math.floor(Math.max(a, b));
 
-  return Math.floor(lower + Math.random() * (upper - lower + 1));
-};
+//   return Math.floor(lower + Math.random() * (upper - lower + 1));
+// };
 
-const getCurrentDate = () => {
-  const currentDate = new Date();
-  currentDate.setHours(23, 59, 59, 999);
-  return new Date(currentDate);
-};
+// const getCurrentDate = () => {
+//   const currentDate = new Date();
+//   currentDate.setHours(23, 59, 59, 999);
+//   return new Date(currentDate);
+// };
 
-export const isTaskExpired = (dueDate) => {
-  if (dueDate === null) {
-    return false;
-  }
+// export const isTaskExpired = (dueDate) => {
+//   if (dueDate === null) {
+//     return false;
+//   }
 
-  const currentDate = getCurrentDate();
+//   const currentDate = getCurrentDate();
 
-  return currentDate.getTime() > dueDate.getTime();
-};
+//   return currentDate.getTime() > dueDate.getTime();
+// };
 
-export const isTaskExpiringToday = (dueDate) => {
-  if (dueDate === null) {
-    return false;
-  }
+// export const isTaskExpiringToday = (dueDate) => {
+//   if (dueDate === null) {
+//     return false;
+//   }
 
-  const currentDate = getCurrentDate();
+//   const currentDate = getCurrentDate();
 
-  return currentDate.getTime() === dueDate.getTime();
-};
+//   return currentDate.getTime() === dueDate.getTime();
+// };
 
-export const isTaskRepeating = (repeating) => {
-  return Object.values(repeating).some(Boolean);
-};
+// export const isTaskRepeating = (repeating) => {
+//   return Object.values(repeating).some(Boolean);
+// };
 
-export const humanizeTaskDueDate = (dueDate) => {
-  return dueDate.toLocaleString(`en-US`, {day: `numeric`, month: `long`});
-};
+// export const humanizeTaskDueDate = (dueDate) => {
+//   return dueDate.toLocaleString(`en-US`, {day: `numeric`, month: `long`});
+// };
