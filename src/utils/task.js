@@ -51,7 +51,6 @@ const getWeightForNullDate = (dateA, dateB) => {
 
 export const sorterTaskUp = (taskA, taskB) => {
   const weight = getWeightForNullDate(taskA.dueDate, taskB.dueDate);
-
   if (weight !== null) {
     return weight;
   }
