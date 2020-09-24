@@ -17,11 +17,11 @@ export default class Board {
     this._renderedTaskCount = TASK_COUNT_PER_STEP;
     this._currentSorterType = SorterType.DEFAULT;
 
-    this._boardComponent = new BoardView();
-    this._sorterComponent = new SorterView();
-    this._taskListComponent = new TaskListView();
-    this._noTaskComponent = new NoTaskView();
-    this._loadMoreButtonComponent = new LoadMoreButtonView();
+    this._boardView = new BoardView();
+    this._sorterView = new SorterView();
+    this._taskListView = new TaskListView();
+    this._noTaskView = new NoTaskView();
+    this._loadMoreButtonView = new LoadMoreButtonView();
 
     this._handleLoadMoreButtonClick = this._handleLoadMoreButtonClick.bind(this);
     this._handleSorterTypeChange = this._handleSorterTypeChange.bind(this);
@@ -31,8 +31,8 @@ export default class Board {
     this._boardTasks = boardTasks.slice();
     this._sourcedBoardTasks = boardTasks.slice();
 
-    render(this._boardContainer, this._boardComponent);
-    render(this._boardComponent, this._taskListComponent);
+    render(this._boardContainer, this._boardView);
+    render(this._boardView, this._taskListView);
 
     this._renderBoard();
   }
@@ -46,7 +46,6 @@ export default class Board {
         this._boardTasks.sort(sorterTaskDown);
         break;
       default:
-
         this._boardTasks = this._sourcedBoardTasks.slice();
     }
 
@@ -57,29 +56,27 @@ export default class Board {
     if (this._currentSorterType === sorterType) {
       return;
     }
-
     this._sorterTasks(sorterType);
-
     this._clearTaskList();
     this._renderTaskList();
   }
 
   _renderSorter() {
 
-    render(this._boardComponent, this._sorterComponent, RenderPosition.AFTERBEGIN);
-    this._sorterComponent.setSorterTypeChangeHandler(this._handleSorterTypeChange);
+    render(this._boardView, this._sorterView, RenderPosition.AFTERBEGIN);
+    this._sorterView.setSorterTypeChangeHandler(this._handleSorterTypeChange);
   }
 
   _renderTask(task) {
-    const taskComponent = new TaskView(task);
-    const taskEditComponent = new TaskEditView(task);
+    const taskView = new TaskView(task);
+    const taskEditView = new TaskEditView(task);
 
     const replaceCardToForm = () => {
-      replace(taskEditComponent, taskComponent);
+      replace(taskEditView, taskView);
     };
 
     const replaceFormToCard = () => {
-      replace(taskComponent, taskEditComponent);
+      replace(taskView, taskEditView);
     };
 
     const onEscKeyDown = (evt) => {
@@ -90,17 +87,17 @@ export default class Board {
       }
     };
 
-    taskComponent.setEditClickHandler(() => {
+    taskView.setEditClickHandler(() => {
       replaceCardToForm();
       document.addEventListener(`keydown`, onEscKeyDown);
     });
 
-    taskEditComponent.setFormSubmitHandler(() => {
+    taskEditView.setFormSubmitHandler(() => {
       replaceFormToCard();
       document.removeEventListener(`keydown`, onEscKeyDown);
     });
 
-    render(this._taskListComponent, taskComponent);
+    render(this._taskListView, taskView);
   }
 
   _renderTasks(from, to) {
@@ -112,7 +109,7 @@ export default class Board {
 
   _renderNoTasks() {
 
-    render(this._boardComponent, this._noTaskComponent, RenderPosition.AFTERBEGIN);
+    render(this._boardView, this._noTaskView, RenderPosition.AFTERBEGIN);
   }
 
   _handleLoadMoreButtonClick() {
@@ -120,17 +117,17 @@ export default class Board {
     this._renderedTaskCount += TASK_COUNT_PER_STEP;
 
     if (this._renderedTaskCount >= this._boardTasks.length) {
-      remove(this._loadMoreButtonComponent);
+      remove(this._loadMoreButtonView);
     }
   }
 
   _renderLoadMoreButton() {
-    render(this._boardComponent, this._loadMoreButtonComponent);
-    this._loadMoreButtonComponent.setClickHandler(this._handleLoadMoreButtonClick);
+    render(this._boardView, this._loadMoreButtonView);
+    this._loadMoreButtonView.setClickHandler(this._handleLoadMoreButtonClick);
   }
 
   _clearTaskList() {
-    this._taskListComponent.getElement().innerHTML = ``;
+    this._taskListView.getElement().innerHTML = ``;
     this._renderedTaskCount = TASK_COUNT_PER_STEP;
   }
 
