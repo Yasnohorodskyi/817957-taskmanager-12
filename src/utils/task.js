@@ -32,7 +32,6 @@ export const humanizeTaskDueDate = (dueDate) => {
   return dueDate.toLocaleString(`en-US`, {day: `numeric`, month: `long`});
 };
 
-
 const getWeightForNullDate = (dateA, dateB) => {
   if (dateA === null && dateB === null) {
     return 0;
